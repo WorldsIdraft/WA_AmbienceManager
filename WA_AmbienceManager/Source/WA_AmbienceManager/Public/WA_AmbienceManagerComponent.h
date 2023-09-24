@@ -1,11 +1,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CoreUObject.h"
 #include "Math/Vector.h"
 #include "Engine/World.h"
 #include "Net/UnrealNetwork.h"
 #include "GameFramework/Character.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
 #include "Components/ActorComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -23,7 +25,9 @@ private:
 
 	UPROPERTY()
 		ACharacter* Ref_OwnerCharacter;
-		
+
+	UPROPERTY()
+		USoundBase* SoundPlaying;
 
 public:
 
@@ -31,6 +35,7 @@ public:
 
 
 	//The Type of environment the player is in.
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WA Ambience Music")
 		enum class EAmbienceType : uint8
 		{
 			None, //0

@@ -1,6 +1,3 @@
-// AssetsBrothers 2023
-
-
 #include "WA_AmbienceManagerComponent.h"
 
 // Sets default values for this component's properties
@@ -22,6 +19,11 @@ void UWA_AmbienceManagerComponent::BeginPlay()
 
 		//Get Character Reference
 		Ref_OwnerCharacter = Cast<ACharacter>(GetOwner());
+		int intTimeDelay = UKismetMathLibrary::RandomIntegerInRange(5, 125);
+		float delayTimer = UKismetMathLibrary::Conv_IntToFloat(intTimeDelay);
+		UKismetSystemLibrary::Delay(this, delayTimer, FLatentActionInfo());
+		// Spawn the sound.
+		UGameplayStatics::SpawnSound2D(this, biome1IslandCUE);
 
 		}
 }
@@ -35,7 +37,11 @@ void UWA_AmbienceManagerComponent::TickComponent(float DeltaTime, ELevelTick Tic
 
 }
 
-
+static UAudioComponent* SpawnSound2D(const UObject* WorldContextObject, USoundBase* Sound, float VolumeMultiplier, float PitchMultiplier, float StartTime, USoundConcurrency* ConcurrencySettings, bool bPersistAcrossLevelTransition, bool bAutoDestroy)
+{
+	// Spawn the sound.
+	return UGameplayStatics::SpawnSound2D(WorldContextObject, Sound, VolumeMultiplier, PitchMultiplier, StartTime, ConcurrencySettings, bPersistAcrossLevelTransition, bAutoDestroy);
+}
 
 
 void UWA_AmbienceManagerComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
